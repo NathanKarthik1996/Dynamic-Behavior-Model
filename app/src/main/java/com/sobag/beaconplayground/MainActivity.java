@@ -10,6 +10,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +63,7 @@ public class MainActivity extends ActionBarActivity
     int piece_size=max_range/cut;
     int[] pieces=new int[cut+1];
     String last;
+    EditText ip;
     String showUrl = "http://192.168.43.82:81/retail/showdata.php";
     String descript;
     //HashMap<String, Integer> meMap=new HashMap<String, Integer>();
@@ -74,6 +77,7 @@ public class MainActivity extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ip=(EditText) findViewById(R.id.editText);
         if(thresh==0) {
             thresh++;
             String insertUrl = "http://192.168.0.16/tutorial/insertStudent.php";
@@ -132,6 +136,11 @@ public class MainActivity extends ActionBarActivity
         scanHandler.post(scanRunnable);
         // init BLE
 
+    }
+    public void change(View view)
+    {
+        String newip=ip.getText().toString();
+        showUrl="http://"+ip+":81/retail/showdata.php";
     }
 
     @Override
